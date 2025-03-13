@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airtime Purchase - Nexsub</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Fullscreen Gradient Background */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+            color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        /* Network Box */
+        .network-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .network-box p {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px; /* Added spacing here */
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .network-options {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .network {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.1);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .network img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            padding: 5px;
+            object-fit: cover;
+        }
+
+        /* Only zoom Glo while keeping the box size same */
+        .network:nth-child(3) img {
+            transform: scale(1.2);
+        }
+
+        .network.selected img {
+            border-color: #00c6ff;
+            background-color: rgba(0, 198, 255, 0.2);
+        }
+
+        .network:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* Form Box */
+        .form-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: left;
+            margin-top: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-box label {
+            font-size: 14px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-box input {
+            width: 92.3%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            outline: none;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .form-box input:focus {
+            border-color: #00c6ff;
+        }
+
+        .error-text {
+            color: #ff4d4d;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .proceed-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .proceed-btn:disabled {
+            background: rgba(255, 255, 255, 0.2);
+            cursor: not-allowed;
+        }
+
+        .proceed-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 198, 255, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Buy Airtime</h2>
+
+        <!-- Network Selection -->
+        <div class="network-box">
+            <p>Select Network</p> <!-- Added margin-bottom to this <p> tag -->
+            <div class="network-options">
+                <div class="network" onclick="selectNetwork('MTN')">
+                    <img src="https://cdn.worldvectorlogo.com/logos/mtn-new-logo.svg" alt="MTN">
+                </div>
+                <div class="network" onclick="selectNetwork('Airtel')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Airtel_logo-01.png" alt="Airtel">
+                </div>
+                <div class="network" onclick="selectNetwork('Glo')">
+                    <img src="https://static-00.iconduck.com/assets.00/globacom-limited-icon-1024x1024-upx9lebq.png" alt="Glo">
+                </div>
+            </div>
+        </div>
+
+        <!-- Phone Number Input -->
+        <div class="form-box">
+            <label for="phone">Phone Number</label>
+            <input type="number" id="phone" placeholder="Enter phone number" oninput="validatePhone()">
+            <p class="error-text" id="phone-error">Invalid number</p>
+        </div>
+
+        <!-- Amount Input -->
+        <div class="form-box">
+            <label for="amount">Airtime Amount (₦)</label>
+            <input type="number" id="amount" placeholder="Enter amount" oninput="validateAmount()">
+            <p class="error-text" id="amount-error">Minimum amount is ₦100</p>
+        </div>
+
+        <!-- Proceed Button -->
+        <button class="proceed-btn" id="proceed-btn" onclick="processAirtime()" disabled>Proceed</button>
+
+        <!-- Error Message -->
+        <p class="error-text" id="balance-error" style="display: none;">Insufficient balance</p>
+    </div>
+
+    <script>
+        let selectedNetwork = null;
+
+        function selectNetwork(network) {
+            selectedNetwork = network;
+            let networkOptions = document.querySelectorAll(".network");
+            networkOptions.forEach(option => option.classList.remove("selected"));
+            
+            if (network === "MTN") {
+                networkOptions[0].classList.add("selected");
+            } else if (network === "Airtel") {
+                networkOptions[1].classList.add("selected");
+            } else if (network === "Glo") {
+                networkOptions[2].classList.add("selected");
+            }
+        }
+
+        function validatePhone() {
+            let phoneInput = document.getElementById("phone");
+            let phoneError = document.getElementById("phone-error");
+            let validPrefixes = ["070", "080", "081", "090", "091"];
+
+            // Limit input to 11 digits
+            if (phoneInput.value.length > 11) {
+                phoneInput.value = phoneInput.value.slice(0, 11);
+            }
+
+            // Show error only after 3rd digit
+            if (phoneInput.value.length >= 3) {
+                let isValid = validPrefixes.some(prefix => phoneInput.value.startsWith(prefix));
+                phoneError.style.display = isValid ? "none" : "block";
+            } else {
+                phoneError.style.display = "none";
+            }
+            checkFormCompletion();
+        }
+
+        function validateAmount() {
+            let amountInput = document.getElementById("amount");
+            let amountError = document.getElementById("amount-error");
+            let proceedBtn = document.getElementById("proceed-btn");
+
+            if (amountInput.value < 100) {
+                amountError.style.display = "block";
+                proceedBtn.disabled = true;
+            } else {
+                amountError.style.display = "none";
+                proceedBtn.disabled = false;
+            }
+            checkFormCompletion();
+        }
+
+        function checkFormCompletion() {
+            let phone = document.getElementById("phone").value;
+            let amount = document.getElementById("amount").value;
+            let proceedBtn = document.getElementById("proceed-btn");
+
+            if (selectedNetwork && phone.length === 11 && amount >= 100) {
+                proceedBtn.disabled = false;
+            } else {
+                proceedBtn.disabled = true;
+            }
+        }
+
+        function processAirtime() {
+            let phone = document.getElementById("phone").value;
+            let amount = document.getElementById("amount").value;
+            let phoneError = document.getElementById("phone-error");
+            let balanceError = document.getElementById("balance-error");
+
+            if (!selectedNetwork) {
+                alert("Please select a network");
+                return;
+            }
+
+            if (phone.length < 11 || phoneError.style.display === "block") {
+                alert("Enter a valid phone number");
+                return;
+            }
+
+            if (amount < 100) {
+                alert("Minimum amount is ₦100");
+                return;
+            }
+
+            balanceError.style.display = "block"; // Show insufficient balance error
+        }
+    </script>
+
+</body>
+</html>

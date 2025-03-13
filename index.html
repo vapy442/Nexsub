@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Welcome to Nexsub</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Fullscreen Dark Background */
+        body {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: 'Roboto', sans-serif;
+            background: #0f0f0f;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Glassmorphism Container */
+        .glass-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Icon */
+        .hero-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-icon img {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Text */
+        h1, p, .start-btn, .privacy-link {
+            animation: fadeIn 1s ease-in-out forwards;
+            opacity: 0;
+        }
+
+        h1 { 
+            font-size: 28px; 
+            margin-bottom: 10px; 
+            animation-delay: 0.2s; 
+            font-weight: 500;
+        }
+
+        p { 
+            font-size: 14px; 
+            opacity: 0.8; 
+            margin-bottom: 20px; 
+            animation-delay: 0.4s; 
+        }
+
+        /* Button */
+        .start-btn {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            padding: 12px 30px;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation-delay: 0.6s;
+            box-shadow: 0 4px 15px rgba(0, 198, 255, 0.4);
+            width: 100%;
+            margin-bottom: 15px; /* Added margin for spacing */
+        }
+
+        .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 198, 255, 0.6);
+        }
+
+        /* Privacy Policy Text Button */
+        .privacy-link {
+            display: block; /* Ensure it's on a new line */
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+            animation-delay: 0.8s;
+        }
+
+        .privacy-link:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Background Particles */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            z-index: -1;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+
+        .particle1 { width: 10px; height: 10px; top: 10%; left: 20%; }
+        .particle2 { width: 15px; height: 15px; top: 30%; left: 70%; }
+        .particle3 { width: 8px; height: 8px; top: 60%; left: 40%; }
+        .particle4 { width: 12px; height: 12px; top: 80%; left: 10%; }
+        .particle5 { width: 9px; height: 9px; top: 50%; left: 90%; }
+
+    </style>
+</head>
+<body>
+
+    <!-- Background Particles -->
+    <div class="particle particle1"></div>
+    <div class="particle particle2"></div>
+    <div class="particle particle3"></div>
+    <div class="particle particle4"></div>
+    <div class="particle particle5"></div>
+
+    <!-- Glassmorphism Container -->
+    <div class="glass-container">
+        <!-- Hero Icon -->
+        <div class="hero-icon">
+            <img src="https://img.icons8.com/ios-filled/100/ffffff/rocket.png" alt="Rocket Icon">
+        </div>
+
+        <h1>Welcome to Nexsub</h1>
+        <p>Your gateway to seamless Data, Airtime, and Bill Payments</p>
+
+        <!-- Start Button -->
+        <button class="start-btn" onclick="window.location.href='indexx.html'">Get Started</button>
+
+        <!-- Privacy Policy Link -->
+        <a href="privacy.html" class="privacy-link">Privacy Policy</a>
+    </div>
+
+    <script>
+        // Trigger animations after page load
+        window.onload = function() {
+            document.querySelectorAll('h1, p, .start-btn, .privacy-link').forEach(el => {
+                el.style.opacity = '1';
+            });
+        };
+    </script>
+
+</body>
+</html>

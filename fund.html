@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fund Wallet - Jamsub</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Fullscreen Gradient Background */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+            color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        /* Payment Options */
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .payment-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+        }
+
+        .payment-option img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .payment-option span {
+            flex: 1;
+            text-align: left;
+            margin-left: 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .selected {
+            border: 2px solid #00c6ff;
+        }
+
+        /* Proceed Button */
+        .proceed-btn {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 20px;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .proceed-btn:disabled {
+            background: rgba(255, 255, 255, 0.2);
+            cursor: not-allowed;
+        }
+
+        .proceed-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 198, 255, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Select a Payment Method</h2>
+
+        <div class="payment-options">
+            <!-- Bank Transfer Option -->
+            <div class="payment-option" id="bankTransfer">
+                <img src="https://cdn-icons-png.flaticon.com/512/8043/8043680.png" alt="Bank Transfer">
+                <span>Bank Transfer</span>
+                <input type="radio" name="payment" value="bank">
+            </div>
+
+            <!-- Paystack Option -->
+            <div class="payment-option" id="paystack">
+                <img src="https://static-00.iconduck.com/assets.00/paystack-icon-512x504-w7v8l6as.png" alt="Paystack">
+                <span>Paystack</span>
+                <input type="radio" name="payment" value="paystack">
+            </div>
+        </div>
+
+        <button class="proceed-btn" id="proceedBtn" disabled>Proceed</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const paymentOptions = document.querySelectorAll(".payment-option");
+            const proceedBtn = document.getElementById("proceedBtn");
+            let selectedMethod = "";
+
+            paymentOptions.forEach(option => {
+                option.addEventListener("click", function () {
+                    paymentOptions.forEach(opt => opt.classList.remove("selected"));
+                    this.classList.add("selected");
+                    selectedMethod = this.id;
+                    proceedBtn.disabled = false;
+                });
+            });
+
+            proceedBtn.addEventListener("click", function () {
+                if (selectedMethod === "bankTransfer") {
+                    window.location.href = "bank.html";
+                } else if (selectedMethod === "paystack") {
+                    window.location.href = "paystack.html";
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

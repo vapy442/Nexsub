@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Transaction PIN</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Fullscreen Gradient Background */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+            color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        /* PIN Display */
+        .pin-display {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .pin-box {
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: white;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .pin-box.filled {
+            border-color: #00c6ff;
+            background-color: rgba(0, 198, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        /* Numpad */
+        .numpad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .numpad button {
+            width: 100%;
+            height: 60px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .numpad button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .numpad button.clear {
+            background: rgba(255, 77, 77, 0.2);
+            color: #ff4d4d;
+        }
+
+        .numpad button.clear:hover {
+            background: rgba(255, 77, 77, 0.3);
+        }
+
+        .numpad button.save {
+            background: ; /* Light Green */
+            color: #4CAF50;
+        }
+
+        .numpad button.save:disabled {
+            background: rgba(18, 175, 16, 0.69);
+            color: rgba(255, 255, 255, 0.3);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .numpad button.save:hover:not(:disabled) {
+            background: rgba(76, 175, 80, 0.3);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Set Transaction PIN</h2>
+
+        <!-- PIN Display -->
+        <div class="pin-display">
+            <div class="pin-box" id="pin1"></div>
+            <div class="pin-box" id="pin2"></div>
+            <div class="pin-box" id="pin3"></div>
+            <div class="pin-box" id="pin4"></div>
+        </div>
+
+        <!-- Numpad -->
+        <div class="numpad">
+            <button onclick="enterDigit(1)">1</button>
+            <button onclick="enterDigit(2)">2</button>
+            <button onclick="enterDigit(3)">3</button>
+            <button onclick="enterDigit(4)">4</button>
+            <button onclick="enterDigit(5)">5</button>
+            <button onclick="enterDigit(6)">6</button>
+            <button onclick="enterDigit(7)">7</button>
+            <button onclick="enterDigit(8)">8</button>
+            <button onclick="enterDigit(9)">9</button>
+            <button class="clear" onclick="clearPin()">⌫</button>
+            <button onclick="enterDigit(0)">0</button>
+            <button class="save" id="saveBtn" disabled onclick="savePin()">❯</button>
+        </div>
+    </div>
+
+    <script>
+        let pin = [];
+
+        function enterDigit(digit) {
+            if (pin.length < 4) {
+                pin.push(digit);
+                updatePinDisplay();
+            }
+        }
+
+        function updatePinDisplay() {
+            for (let i = 0; i < 4; i++) {
+                const pinBox = document.getElementById('pin' + (i + 1));
+                pinBox.innerText = pin[i] !== undefined ? "•" : "";
+                pinBox.classList.toggle('filled', pin[i] !== undefined);
+            }
+            document.getElementById('saveBtn').disabled = pin.length !== 4;
+        }
+
+        function clearPin() {
+            pin = [];
+            updatePinDisplay();
+        }
+
+        function savePin() {
+            if (pin.length === 4) {
+                let pinCode = pin.join("");
+                localStorage.setItem("transactionPIN", pinCode);
+                alert("Transaction PIN set successfully!");
+                window.location.href = 'home.html';
+            }
+        }
+    </script>
+
+</body>
+</html>

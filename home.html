@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jamsub - Home</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Fullscreen Gradient Background */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+            color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 400px;
+            margin: 20px auto;
+            text-align: center;
+            padding-top: 20px; /* Add padding to start content from the top */
+        }
+
+        /* Profile Section */
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .profile img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile h2 {
+            font-size: 18px;
+            margin: 0;
+            color: white;
+        }
+
+        /* Balance Card */
+        .balance-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .balance-card h2 {
+            font-size: 16px;
+            margin: 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .balance-card .balance {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .fund-wallet {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            border: none;
+            padding: 10px;
+            color: white;
+            border-radius: 20px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .fund-wallet:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 198, 255, 0.4);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .action {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, background 0.3s;
+            text-decoration: none; /* Remove underline */
+        }
+
+        .action:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .action img {
+            width: 30px;
+            height: 30px;
+            margin-bottom: 5px;
+        }
+
+        /* Recent Activity */
+        .recent-activity {
+            text-align: left;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .recent-activity a {
+            float: right;
+            color: #00c6ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .recent-activity a:hover {
+            color: #0072ff;
+        }
+
+        /* No Recent Activity */
+        .no-activity {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 20px;
+        }
+
+        .no-activity img {
+            width: 80px;
+            height: 80px;
+            opacity: 0.5;
+            margin-bottom: 10px;
+        }
+
+        /* Transactions Table */
+        .transaction-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .transaction-table th, .transaction-table td {
+            padding: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+            font-size: 12px;
+        }
+
+        .transaction-table th {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .transaction-table td {
+            color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Profile Section -->
+        <div class="profile">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRevt4uWpQxo_rlaPD6LRN6Z1GZ0wIxCQ2FmaHjhMXhQ5EZ5rHO5mwWLKNx&s=10" alt="User Avatar">
+            <h2 id="userName">Hello, User</h2>
+        </div>
+
+        <!-- Balance Card -->
+        <div class="balance-card">
+            <h2>Total Balance</h2>
+            <div class="balance" id="userBalance">₦50.00</div>
+            <button class="fund-wallet" onclick="window.location.href='fund-amount.html'">Fund Wallet</button>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <a href="airtime.html" class="action">
+                <img src="https://img.icons8.com/ios/50/ffffff/phone.png" alt="Airtime">
+                Airtime
+            </a>
+            <a href="data.html" class="action">
+                <img src="https://img.icons8.com/ios/50/ffffff/internet.png" alt="Data">
+                Data
+            </a>
+            <a href="cable.html" class="action">
+                <img src="https://img.icons8.com/ios/50/ffffff/tv.png" alt="Cable TV">
+                CableTV
+            </a>
+            <a href="index.html" class="action">
+                <img src="https://img.icons8.com/ios/50/ffffff/exit.png" alt="Log out">
+                Logout
+            </a>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="recent-activity">
+            <span>Recent Activity</span>
+            <a href="#">See all</a>
+        </div>
+
+        <!-- Transactions / No Recent Activity -->
+        <div id="transactionsContainer">
+            <div id="noActivity" class="no-activity">
+                <img src="https://img.icons8.com/ios/100/ffffff/empty-box.png" alt="No Activity">
+                <p>No recent activity yet</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const storedUser = localStorage.getItem("fullName");
+            if (storedUser) {
+                document.getElementById("userName").textContent = "Hello, " + storedUser;
+            }
+
+            // Load transactions
+            const transactionsContainer = document.getElementById("transactionsContainer");
+            const noActivity = document.getElementById("noActivity");
+            const transactions = JSON.parse(localStorage.getItem("recent-transactions")) || [];
+
+            if (transactions.length > 0) {
+                noActivity.style.display = "none"; // Hide animation if transactions exist
+
+                let tableHTML = `
+                    <table class="transaction-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                transactions.forEach(tx => {
+                    tableHTML += `
+                        <tr>
+                            <td>${tx.date}</td>
+                            <td>${tx.type}</td>
+                            <td>₦${tx.amount}</td>
+                            <td>${tx.status}</td>
+                        </tr>
+                    `;
+                });
+
+                tableHTML += `</tbody></table>`;
+                transactionsContainer.innerHTML = tableHTML;
+            }
+        });
+    </script>
+
+</body>
+</html>

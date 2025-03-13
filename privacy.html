@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Nexsub</title>
+    <style>
+        /* Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Fullscreen Gradient Background */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+            color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        h2 {
+            color: white;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #00c6ff;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        p, ul {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        .contact-link {
+            color: #00c6ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+
+        .back-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: 0.3s ease-in-out;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 198, 255, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Privacy Policy</h2>
+        <p><strong>Last updated:</strong> <span id="lastUpdated"></span></p>
+
+        <h3>1. Information We Collect</h3>
+        <p>When you use Nexsub, we collect the following data:</p>
+        <ul>
+            <li>Personal Information (Full Name, Email, Phone Number)</li>
+            <li>Transaction Details (Airtime, Data Purchases, Payment History)</li>
+            <li>Device and Browser Information (IP Address, Cookies, Logs)</li>
+        </ul>
+
+        <h3>2. How We Use Your Information</h3>
+        <p>Your data is used to:</p>
+        <ul>
+            <li>Process transactions (data, airtime, and bill payments)</li>
+            <li>Provide customer support and improve our services</li>
+            <li>Ensure account security and prevent fraud</li>
+        </ul>
+
+        <h3>3. Data Security</h3>
+        <p>We implement security measures to protect user data. However, no system is 100% secure.</p>
+
+        <h3>4. Third-Party Services</h3>
+        <p>Nexsub may use third-party payment providers. We do not store your card details.</p>
+
+        <h3>5. User Rights</h3>
+        <p>You have the right to:</p>
+        <ul>
+            <li>Request data deletion</li>
+            <li>Update your personal information</li>
+            <li>Opt out of marketing messages</li>
+        </ul>
+
+        <h3>6. Updates to This Policy</h3>
+        <p>We may update this policy. Any changes will be posted here.</p>
+
+        <h3>7. Contact Us</h3>
+        <p>For questions, contact us at <a href="mailto:support@nexsub.com" class="contact-link">support@nexsub.com</a>.</p>
+    </div>
+
+    <button class="back-btn" onclick="window.location.href='index.html'">Back to Home</button>
+
+    <script>
+        // Automatically update the "Last updated" date
+        document.getElementById("lastUpdated").textContent = new Date().toLocaleDateString();
+    </script>
+
+</body>
+</html>

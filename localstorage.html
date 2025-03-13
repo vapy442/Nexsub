@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalStorage Editor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: #333;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            text-align: left;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        input {
+            background: #444;
+            color: white;
+        }
+        button {
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .save { background: #28a745; color: white; }
+        .delete { background: #dc3545; color: white; }
+        .clear { background: #ff5733; color: white; }
+        .add { background: #007bff; color: white; }
+        .reset { background: #ffc107; color: black; }
+        .item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px;
+            background: #444;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        .item input {
+            width: 40%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>LocalStorage Editor</h2>
+        <h4>Add New Item</h4>
+        <input type="text" id="newKey" placeholder="Enter key name">
+        <input type="text" id="newValue" placeholder="Enter value">
+        <button class="add" onclick="addNewItem()">Add Item</button>
+
+        <h4>Stored Items</h4>
+        <div id="storageList"></div>
+
+        <button class="clear" onclick="clearStorage()">Clear All</button>
+    </div>
+
+    <script>
+        function loadStorage() {
+            let storageList = document.getElementById("storageList");
+            storageList.innerHTML = "";
+
+            if (localStorage.length === 0) {
+                storageList.innerHTML = "<p>No data in localStorage</p>";
+                return;
+            }
+
+            for (let i = 0; i < localStorage.length; i++) {
+                let key = localStorage.key(i);
+                let value = localStorage.getItem(key);
+
+                let itemDiv = document.createElement("div");
+                itemDiv.className = "item";
+                itemDiv.innerHTML = `
+                    <input type="text" value="${key}" id="key-${key}">
+                    <input type="text" value="${value}" id="value-${key}">
+                    <button class="save" onclick="saveItem('${key}')">Save</button>
+                    <button class="reset" onclick="resetItem('${key}', '${value}')">Reset</button>
+                    <button class="delete" onclick="deleteItem('${key}')">X</button>
+                `;
+                storageList.appendChild(itemDiv);
+            }
+        }
+
+        function saveItem(oldKey) {
+            let newKey = document.getElementById(`key-${oldKey}`).value.trim();
+            let newValue = document.getElementById(`value-${oldKey}`).value.trim();
+
+            if (newKey !== oldKey) {
+                localStorage.removeItem(oldKey);
+            }
+            localStorage.setItem(newKey, newValue);
+            loadStorage();
+        }
+
+        function resetItem(key, originalValue) {
+            document.getElementById(`key-${key}`).value = key;
+            document.getElementById(`value-${key}`).value = originalValue;
+        }
+
+        function deleteItem(key) {
+            localStorage.removeItem(key);
+            loadStorage();
+        }
+
+        function clearStorage() {
+            if (confirm("Are you sure you want to delete all localStorage data?")) {
+                localStorage.clear();
+                loadStorage();
+            }
+        }
+
+        function addNewItem() {
+            let key = document.getElementById("newKey").value.trim();
+            let value = document.getElementById("newValue").value.trim();
+
+            if (key === "") {
+                alert("Key cannot be empty!");
+                return;
+            }
+
+            localStorage.setItem(key, value);
+            document.getElementById("newKey").value = "";
+            document.getElementById("newValue").value = "";
+            loadStorage();
+        }
+
+        loadStorage();
+    </script>
+
+</body>
+</html>

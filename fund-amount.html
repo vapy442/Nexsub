@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit Amount - Jamsub</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Fullscreen Gradient Background */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+            color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        /* Deposit Box */
+        .deposit-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .deposit-box label {
+            font-size: 14px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.8);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .deposit-box input {
+            width: 92.3%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            outline: none;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .deposit-box input:focus {
+            border-color: #00c6ff;
+        }
+
+        .note {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 8px;
+        }
+
+        .proceed-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .proceed-btn:disabled {
+            background: rgba(255, 255, 255, 0.2);
+            cursor: not-allowed;
+        }
+
+        .proceed-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 198, 255, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Enter Deposit Amount</h2>
+
+        <div class="deposit-box">
+            <label for="amount">Amount (₦)</label>
+            <input type="number" id="amount" placeholder="₦1000 min" min="1000">
+            <p class="note">Minimum deposit is ₦1,000</p>
+            <button class="proceed-btn" onclick="processDeposit()">Proceed</button>
+        </div>
+    </div>
+
+    <script>
+        function processDeposit() {
+            let amount = document.getElementById("amount").value;
+
+            if (amount < 1000) {
+                alert("Minimum deposit is ₦1,000");
+                return;
+            }
+
+            let transactions = JSON.parse(localStorage.getItem("recent-transactions")) || [];
+
+            let newTransaction = {
+                date: new Date().toLocaleDateString(),
+                type: "Deposit",
+                amount: amount,
+                status: "Successful"
+            };
+
+            transactions.push(newTransaction);
+            localStorage.setItem("recent-transactions", JSON.stringify(transactions));
+
+            window.location.href = "fund.html"; // Navigate to fund page
+        }
+    </script>
+
+</body>
+</html>
